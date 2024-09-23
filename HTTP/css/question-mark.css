@@ -1,4 +1,5 @@
 .question-container {
+	pointer-events:none;
 	position: absolute;
 	
 	top: 0;
@@ -14,6 +15,7 @@
 }
 
 .question-mark{
+	pointer-events:none;
 	position:relative;
 }
 
@@ -55,6 +57,7 @@
 }
 
 .question-mark .highlight {
+	pointer-events:auto;
 	background-image: url('../assets/images/questionmark/QuestionMarkAuar_225x361.png');
 
 	opacity: 0;
