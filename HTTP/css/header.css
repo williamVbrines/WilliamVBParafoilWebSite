@@ -1,0 +1,57 @@
+/*FONTS*/
+@font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
+
+
+header {
+	position: absolute;
+	
+	top: 1%;
+	left: 10%;
+	right: 10%;
+	
+	height:10%;
+	margin:0;
+	
+	/*Default properties*/
+	color: #dcd2ca;
+	text-align: center;
+	
+	font-family: IMFell;
+	font-size: 8vh;
+}
+
+header h1 {
+	display: block;
+}
+
+.motif-line {
+	/*Flex Container*/
+    display: -webkit-flex; /* Safari */
+    display: -ms-flexbox;  /* IE 10 */
+    display: flex;         /* Modern browsers */
+    justify-content: center;
+    align-items: flex-end;
+} 
+
+.motif-line .line {
+	height: 0.6vh;
+	width: 50%;
+
+	outline-color: #dcd2ca;
+	background-color: #dcd2ca;
+}
+
+.motif-line .motif {
+	
+	
+	background-image: url("../assets/images/titleline/titleline_end_50x28.png");
+	background-size: cover;
+    background-repeat: no-repeat;
+	
+	width:calc(2vh * 50 / 28);
+	height:2vh;
+	
+}
+
+
+

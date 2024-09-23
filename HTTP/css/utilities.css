@@ -1,0 +1,7 @@
+.flip-horizontal {
+    -webkit-transform: scaleX(-1); For Safari and older Chrome
+    -moz-transform: scaleX(-1);    For older Firefox
+    -ms-transform: scaleX(-1);     For older Internet Explorer
+    -o-transform: scaleX(-1);      For older Opera
+    transform: scaleX(-1);         Standard syntax
+}

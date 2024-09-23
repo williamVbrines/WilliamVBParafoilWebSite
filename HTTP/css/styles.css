@@ -1,0 +1,207 @@
+/*FONTS*/
+@font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
+body {
+	background-color: black;
+}
+
+/* BOOK FALL */
+.falling_books_container {
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: content-box; /* This will hide the overflow of falling books */  
+	
+}
+.falling-book {
+	position: absolute;
+	top: 0;
+	left: 0; 
+	max-width: 100px; /* Adjust the size of the book */
+	overflow: hidden;
+	box-sizing: content-box;
+	
+	background-color: rgba(255, 255, 255, 0);
+	color: rgba(255, 255, 255, 1);
+	transition: box-shadow color background-color 0.2s ease-in-out;
+	
+	filter: blur(1px);
+	
+}
+.falling-book:hover {
+	color: rgba(255, 255, 255, 1);
+	background-color: rgba(255, 255, 255, .4);
+	box-shadow: 0 5px 15px rgba(255, 255, 255, .7);
+}
+
+.falling_books_fare_container {
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: content-box; /* This will hide the overflow of falling books */
+	
+}
+.falling-book_fare {
+	position: absolute;
+	top: 0;
+	left: 0; 
+	max-width: 100px; /* Adjust the size of the book */
+	overflow: hidden;
+	box-sizing: content-box;
+	filter: brightness(0.8) hue-rotate(180deg) blur(3px);
+}
+
+/*BookForground*/
+.forground-container {
+	pointer-events:none;  
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	height: 100%;
+	width: 100%;
+	/* background-color: black; */
+	filter: blur(3px);
+	
+}
+.forground-container-blur {
+	pointer-events:none;  
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	height: 100%;
+	width: 100%;
+	/* background-color: black; */
+	filter: blur(3px);
+	/* opacity:0.75; */
+	/* mix-blend-mode: multiply; */
+	
+}
+.forground_book_loop {
+	pointer-events:none;  
+	position: fixed;
+	top:76%;
+	left:0;
+	
+	height:100%;
+	width:100%;
+	
+	
+	background-size:calc(24vh * 2028 / 384) 24%;
+	background-image: url('../assets/images/forgroundBooks/ForgroundBookLoop_2028x384.png');
+	
+}
+.forground_corner_L {
+	pointer-events:none;  
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 61.875%; 
+	/* width: calc(61.875% * 350 / 990);  */
+	
+}
+.forground_corner_R {
+	pointer-events:none;  
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 61.875%; 
+	/* width: calc(61.875% * 350 / 990);  */
+	
+}
+
+/*Question mark*/
+.question-container {
+	position: absolute;
+	pointer-events:none;
+	top: 0;
+	left: 10%;
+	right: 10%;
+	height: 100%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	/* background-color:black; */
+}
+
+.question-mark-container {
+	position:relative;
+	pointer-events:none;
+	/* background-color:white; */
+}
+.question-img {
+	pointer-events:none;
+	
+	position:absolute;
+
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -80%);
+	height:30vh;
+}
+
+@keyframes fade_in_out{
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+.question-shadow-puls{
+	position:absolute;
+
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -80%);
+
+	
+	height:30vh;
+	
+	opacity: 0;
+	mix-blend-mode:screen;
+	
+	animation-name: fade_in_out;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: ease-in-out;
+}
+
+.question-shadow {
+	position:absolute;
+	pointer-events:auto ;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -80%);
+
+	
+	height:30vh;
+	
+	opacity: 0;
+	mix-blend-mode:screen;
+	transition: opacity 0.5s ease-in-out;
+}
+.question-shadow:hover {
+	opacity: 1;
+}
+
+.question-text {
+	position:absolute;
+	text-align: center;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	
+	color: #dcd2ca;
+	text-align: center;
+	font-family: IMFell;
+	font-size: 5vh;
+	
+	word-wrap: break-word;
+	overflow: hidden;
+}

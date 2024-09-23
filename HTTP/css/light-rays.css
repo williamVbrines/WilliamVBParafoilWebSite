@@ -1,0 +1,133 @@
+.ray-box {
+	position: fixed;
+	top:0px;
+	left:0;
+	right:0;
+	bottom:0;
+	margin: auto;
+		
+	width:100%;  
+	
+	-webkit-filter: blur(3px);
+	filter: blur(3px);
+	
+	overflow: hidden;
+}
+
+.ray-box .ray-small, .ray-box .ray-mid, .ray-box .ray-large {  
+	position:fixed;
+	margin-left:10px;
+	
+	background-image: linear-gradient(180deg, rgba(139,200,210,1) 0%, rgba(139,200,210,0) 100%);
+	background-image: -webkit-linear-gradient(270deg, rgba(139,200,210,1) 0%, rgba(139,200,210,0) 100%);
+	background-image: -moz-linear-gradient(180deg, rgba(139,200,210,1) 0%, rgba(139,200,210,0) 100%);
+	background-image: -o-linear-gradient(180deg, rgba(139,200,210,1) 0%, rgba(139,200,210,0) 100%);
+	
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	
+	height:600%;
+	left: 0%;
+    
+    opacity:.8;
+	mix-blend-mode: screen;
+	
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: ease-in-out;
+}
+
+.ray-box .ray-small {
+    width:8px;
+    animation-name: anim_ray_small;
+	animation-duration: 3s;
+}
+.ray-box .ray-mid {    
+    width:30px;
+	animation-name: anim_ray_mid;
+	animation-duration: 3s;
+}
+.ray-box .ray-large {
+    width:50px;
+	animation-name: anim_ray_large;
+	animation-duration: 4s;
+}
+
+@keyframes anim_ray_small{
+	from {height:600%; width: 8px;}
+	to {height:605%;width: 10px;}
+}
+@keyframes anim_ray_mid{
+	from {width: 30px;}
+	to {width: 40px;}
+}
+@keyframes anim_ray_large{
+	from {width: 50px;}
+	to {width: 60px;}
+}
+
+.ray-box .pos-11{
+	top: -210%;
+	animation-duration: 3.4s;
+}
+.ray-box .pos-12{
+	top: -230%;
+	animation-duration: 2.9s;
+}
+.ray-box .pos-13{
+	top: -310%;
+	animation-duration: 3.2s;
+}
+.ray-box .pos-14{
+	top: -330%;
+	animation-duration: 3.1s;
+}
+.ray-box .pos-15{
+	top: -390%;
+	animation-duration: 2s;
+}
+
+.ray-box .pos-21{
+	top: -230%;
+}
+.ray-box .pos-22{
+	top: -280%;
+}
+.ray-box .pos-23{
+	top: -300%;
+}
+.ray-box .pos-24{
+	top: -370%;
+}
+
+.ray-box .pos-31{
+	top: -270%;
+}
+.ray-box .pos-32{
+	top: -410%;
+}
+
+.ray-box .light-bleed-top, .ray-box .light-bleed-left {
+	position:fixed;
+	top:0;
+	left:0;
+	
+	width: 100%;
+	height:100%;
+	
+	opacity:0.2;
+	mix-blend-mode: screen;
+}
+
+.ray-box .light-bleed-top{
+	background-image: linear-gradient(180deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -webkit-linear-gradient(270deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -moz-linear-gradient(180deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -o-linear-gradient(180deg, rgba(139,200,210,1), rgba(139,200,210,0));
+}
+.ray-box .light-bleed-left{
+	background-image: linear-gradient(90deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -webkit-linear-gradient(0deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -moz-linear-gradient(90deg, rgba(139,200,210,1), rgba(139,200,210,0));
+	background-image: -o-linear-gradient(90deg, rgba(139,200,210,1), rgba(139,200,210,0));
+}

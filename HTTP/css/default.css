@@ -1,0 +1,6 @@
+/*FONTS*/
+@font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
+
+body {
+	background-color: black;
+}

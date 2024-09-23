@@ -1,0 +1,93 @@
+/*FONTS*/
+@font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
+
+nav {
+	position: absolute;
+	top:15%;
+	left: 0;
+	
+	height: 50vh;
+	width: 10vh;
+}
+
+nav .tab {
+	position: relative;
+	left: -100%;
+	
+	width: 200%;
+	height: 10vh;
+	margin-top: 10px;
+	
+	line-height: 10vh;/*vertical-align text center */
+	color: #dcd2ca;
+	text-align: left;
+	font-family: IMFell;
+	font-size: 8vh;
+
+	transition: left 0.5s ease-in-out;
+}
+
+
+nav .home{
+	left: -100%;
+}
+nav .home:hover {
+	left:calc((10vh * 1341 / 175) - 60vh);
+}
+
+
+nav .resume{
+	left: -100%;
+}
+nav .resume:hover {
+	left:calc((10vh * 1341 / 175) - 55vh);
+}
+
+
+nav .portfolio{
+	left: -100%;
+}
+nav .portfolio:hover {
+	left:calc((10vh * 1341 / 175) - 50vh);
+}
+
+.tab .background, .shadow {
+	position: absolute;
+
+	right: 0;
+	
+	width: calc(10vh * 1341 / 175);/* Calculate width based on image aspect ratio */
+	height: 10vh;
+	line-height: 10vh;/*vertical-align text center */
+	
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tab .background{
+	top:0;
+	background-image: url("../assets/images/tab/Tab_1341x175.png");
+}
+
+.tab .shadow{
+	top:1vh;
+	background-image: url("../assets/images/tab/TabShadow_1341x175.png");
+	mix-blend-mode: multiply;
+}
+
+.tab a{
+	text-decoration: none; /* Removes underline */
+	position: absolute;
+	right: 10vh;
+	
+	line-height: 10vh;/*vertical-align text center */
+	color: #dcd2ca;
+	text-align: right;
+	font-family: IMFell;
+	font-size: 8vh;
+}
+
+.tab a:hover {
+    text-decoration: none; /* Adds underline on hover */
+}
+

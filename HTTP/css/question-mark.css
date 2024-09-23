@@ -1,0 +1,84 @@
+.question-container {
+	position: absolute;
+	
+	top: 0;
+	left: 10%;
+	right: 10%;
+	height: 100%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	/* background-color:blue;  */
+}
+
+.question-mark{
+	position:relative;
+}
+
+.question-mark .base, .question-mark .aura, .question-mark .highlight{
+	position:absolute;
+	top: 30%;
+	left: 50%;
+	
+	height:30vh;
+	width: calc(30vh * 225 / 361);
+	
+	background-size: calc(30vh * 225 / 361) 30vh; /*calc(30vh * 225 / 361 calc(100vh * Width / Height);*/
+	
+	transform: translate(-50%, -80%);
+}
+
+.question-mark .base {
+	pointer-events:none;
+	pointer: none;
+	background-image: url('../assets/images/questionmark/QuestionMarkBase_225x361.png');
+}
+
+.question-mark .aura {
+	pointer-events:none;
+	background-image: url('../assets/images/questionmark/QuestionMarkAuar_225x361.png');
+	
+	opacity: 0;
+	mix-blend-mode:screen;
+	
+	animation-name: fade_in_out;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: ease-in-out;
+}
+@keyframes fade_in_out{
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.question-mark .highlight {
+	background-image: url('../assets/images/questionmark/QuestionMarkAuar_225x361.png');
+
+	opacity: 0;
+	mix-blend-mode:screen;
+	
+	cursor: pointer;
+	transition: opacity 1.5s ease-in-out;
+}
+.question-mark .highlight:hover {
+	opacity:1.0;
+}
+
+.question-text {
+	position:absolute;
+	text-align: center;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	
+	color: #dcd2ca;
+	text-align: center;
+	font-family: IMFell;
+	font-size: 5vh;
+	
+	word-wrap: break-word;
+	overflow: hidden;
+}
