@@ -1,8 +1,5 @@
-const quotes_list = [
-	"Hello", 
-	"This web site was made by William VB", 
-	"The books are links to projects and portfolio pices",
-	"This question mark displays quotes when clicked"
+var quotes_list = [
+	"placeholder"
 	];
 	
 var selection_tabel = [];//What quotes can be selected from the quote list
@@ -45,9 +42,38 @@ function get_semi_random_quote(){
 	return quotes_list.at(selection);
 }
 
-function update_question_mark_text (event) {
+function update_question_mark_text (event=undefined) {
 	var text_element = document.getElementById("question-mark-text");
 	text_element.innerHTML = get_semi_random_quote();
 }
+
+async function fetch_quotes_list_data() {
+	//NOTE SURVER SIDE CROSS NEEDS TO BE SET UP TO TEST
+	const url = "http://10.10.10.100/data/quotes-list.txt";//TODO REMOVE AFTER TESTING OR RELEACE
+	
+	try {
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`);
+		}
+
+		const full_text = await response.text();
+		quotes_list = full_text.split("\n");
+		
+		if(quotes_list.at(quotes_list.length-1) == ""){
+			quotes_list.pop();
+		}
+		
+		update_question_mark_text();
+		
+	} catch (error) {
+		console.error(error.message);
+	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch_quotes_list_data();
+	
+});
 
 populate_selection_tabel();
