@@ -1,5 +1,14 @@
+/*Z-indexes
+0 = BASE background;
+1 = Far Books;
+2 = Light Rays
+3 = Foliage;
+4 = Books Focus
+5 = Navigation, Header, Question-Mark
+*/
+
 .foliage{
-	
+	z-index = 3;
 }
 
 .foliage .left, .foliage .right, .foliage .left-shadow, .foliage .right-shadow{
@@ -71,6 +80,8 @@
 	
 	-webkit-filter: blur(3px);
 	filter: blur(3px);
+	
+	z-index = 0;
 }
 
 .background-container .tiling-base, .background-container .tiling-highlight{

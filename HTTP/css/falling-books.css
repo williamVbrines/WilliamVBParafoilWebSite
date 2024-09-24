@@ -1,3 +1,12 @@
+/*Z-indexes
+0 = BASE background;
+1 = Far Books;
+2 = Light Rays
+3 = Foliage;
+4 = Books Focus
+5 = Navigation, Header, Question-Mark
+*/
+
 /* BOOK FALL */
 .falling_books_container{
 	position: absolute;
@@ -9,16 +18,17 @@
 	box-sizing: content-box; /* This will hide the overflow of falling books */  
 }
 
-.falling-book, .falling-book_fare {
+.falling-book, .falling-book-far {
 	position: absolute;
 	top: 0;
 	left: 0; 
-	max-width: 100px; /* Adjust the size of the book */
+	max-width: 15vh; /* Adjust the size of the book */
 	overflow: hidden;
 	box-sizing: content-box;
 }
-.falling-book_fare {
+.falling-book-far {
 	filter: brightness(0.8) hue-rotate(180deg) blur(3px);
+	z-index = 1;
 }
 .falling-book{
 	background-color: rgba(255, 255, 255, 0);
@@ -27,6 +37,8 @@
 	filter: blur(1px);
 	
 	transition: box-shadow color background-color 0.2s ease-in-out;	
+	
+	z-index = 4;
 }
 .falling-book:hover {
 	color: rgba(255, 255, 255, 1);
@@ -36,7 +48,7 @@
 
 #hover-text_container{
 	
-	/* display:none; */
+	display:none;
 	
 	position: fixed;
 	
@@ -44,6 +56,7 @@
 	height: auto;
 	
 	padding: 4px;
+	
 	/* Border */
 	border: 2px solid #dcd2ca;
 	border-radius: 6px;
@@ -53,5 +66,5 @@
 	text-align: center;
 	
 	font-family: IMFell;
-	font-size: 2vh;
+	font-size: 3vh;
 }

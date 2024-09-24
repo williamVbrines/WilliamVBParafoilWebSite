@@ -1,3 +1,12 @@
+/*Z-indexes
+0 = BASE background;
+1 = Far Books;
+2 = Light Rays
+3 = Foliage;
+4 = Books Focus
+5 = Navigation, Header, Question-Mark
+*/
+
 .question-container {
 	pointer-events:none;
 	position: absolute;
@@ -11,6 +20,7 @@
 	justify-content: center;
 	align-items: center;
 	
+	z-index = 5;
 	/* background-color:blue;  */
 }
 

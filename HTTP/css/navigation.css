@@ -1,3 +1,12 @@
+/*Z-indexes
+0 = BASE background;
+1 = Far Books;
+2 = Light Rays
+3 = Foliage;
+4 = Books Focus
+5 = Navigation, Header, Question-Mark
+*/
+
 /*FONTS*/
 @font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
 
@@ -8,6 +17,8 @@ nav {
 	
 	height: 50vh;
 	width: 10vh;
+	
+	z-index = 5;
 }
 
 nav .tab {

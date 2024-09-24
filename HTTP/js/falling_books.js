@@ -150,5 +150,6 @@ function book_mouseout(event) {
 
 window.addEventListener('load', function() {
 	init_books(document.getElementById("falling_books_container_focus"), "falling-book", true);
+	init_books(document.getElementById("falling_books_container_far"), "falling-book-far", false);
 });
 

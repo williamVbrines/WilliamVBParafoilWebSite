@@ -1,3 +1,12 @@
+/*Z-indexes
+0 = BASE background;
+1 = Far Books;
+2 = Light Rays
+3 = Foliage;
+4 = Books Focus
+5 = Navigation, Header, .motif-line, Question-Mark
+*/
+
 /*FONTS*/
 @font-face { font-family: IMFell; src: url('../assets/fonts/IMFellEnglish-Regular.ttf'); } 
 
@@ -18,6 +27,8 @@ header {
 	
 	font-family: IMFell;
 	font-size: 8vh;
+	
+	z-index = 5;
 }
 
 header h1 {
@@ -31,6 +42,8 @@ header h1 {
     display: flex;         /* Modern browsers */
     justify-content: center;
     align-items: flex-end;
+	
+	z-index = 5;
 } 
 
 .motif-line .line {
