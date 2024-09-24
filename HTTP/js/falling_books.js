@@ -23,10 +23,17 @@ function get_random_int(max){
   return Math.floor(Math.random() * max);
 }
 
-function init_books (book_container) {
+function init_books (book_container, book_class, has_event) {
 	for (var index = 0; index < BOOKS_MAX; index++) {
 		const new_book = document.createElement("img");
-		init_book(new_book);
+		init_book(new_book, book_class);
+		new_book.id = "book_index_" + index;
+		
+		if(has_event == true){
+			new_book.addEventListener("mouseover", book_mouseover);
+			new_book.addEventListener("mouseout", book_mouseout);
+			new_book.addEventListener("click", book_click);
+		}
 		
 		book_container.appendChild(new_book);
 	}
@@ -38,12 +45,12 @@ function generate_random_image_path() {
 }
 
 function get_random_page_index() {
-	get_random_int(PAGE_DATA.length);
+	return get_random_int(PAGE_DATA.length);
 }
 
-//Infocus Books//////////////////////////////
-function init_book(book){
-    book.classList.add('falling-book');
+
+function init_book(book, book_class){
+    book.classList.add(book_class);
 	book.style.opacity = 1;
 	book.style.animationTimingFunction = 'linear';
 	
@@ -57,6 +64,8 @@ function reset_book(index){
 	book.style.opacity = 1;
 }
 
+
+//Called at the end of the animation cicle to make the illussion that there are different books falling
 function randomize_book(index){
 	var book = falling_books[index][0];
 	
@@ -74,7 +83,7 @@ function randomize_book(index){
 	
 }
 
-//Animation Logic
+//The animatin shuild resembel a falling object slowly rotating from the top of the sceen to the bottom.
 function start_anim(index) {
 	//Animations/////////////////////////////////////////////////
 	function anim_fall_down(timestamp) {
@@ -106,20 +115,40 @@ function start_anim(index) {
   requestAnimationFrame(anim_fall_down);//Start anim
 }
 
-
-function book_click() {
-	//Find element clicked in falling_books 
+//BOCK EVENTS
+function book_click(event) {
+	var shearch = function (element) { return element[0] == event.srcElement }//Find element clicked in falling_books 
+	
 	//Index into PAGE_DATA index 1 is the URL
-
-    //Move location window.location.href = url;
+	var url = PAGE_DATA[falling_books.find(shearch)[1]][1]
+	
+    //Move location 
+	window.location.href = url;
 }
 
-function book_hover() {
-	//Find element clicked in falling_books 
-	//Index into PAGE_DATA index 0 is the display text
+function book_mouseover(event) {
+	var shearch = function (element) { return element[0] == event.srcElement }
+	
+	var hover_text_element = document.getElementById("hover-text_container");
+	
+	var x = event.clientX;
+	var y = event.clientY;
+	
+	var title = PAGE_DATA[falling_books.find(shearch)[1]][0];
+	
+	hover_text_element.style.left = x + "px";
+	hover_text_element.style.top = y + "px";
+	hover_text_element.style.display = "block";
+	hover_text_element.innerHTML = title;
+}
+
+function book_mouseout(event) {
+	var hover_text_element = document.getElementById("hover-text_container");
+	
+	hover_text_element.style.display = "none";
 }
 
 window.addEventListener('load', function() {
-	init_books(document.getElementById("falling_books_container"));
+	init_books(document.getElementById("falling_books_container_focus"), "falling-book", true);
 });
 
