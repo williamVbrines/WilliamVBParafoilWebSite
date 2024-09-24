@@ -3,9 +3,12 @@ const BOOK_EXTENSION = ".png";
 const BOOK_IMAGES_MAX = 9;//The amount of images in BOOK_PATH. Used to geneerate a path to said image.
 
 //[[page tilte, page link], [page tilte, page link], [page tilte, page link] ]
-const PAGE_DATA = [
+var page_data_list = [
 ["Home", "#"]//#TO-DO Remove Place holder
 ];
+
+var page_data_list_selection = [];
+var last_page_data_list_selection = 0;
 
 const BOOKS_MAX = 10;//The Maximum amout of books possible on screen
 
@@ -16,11 +19,40 @@ const MIN_ROT_SPEED = -30;
 const BOTTOM_OFFSET = 200;
 
 //[[element,index,time_start], [element,index,time_start], [element,index,time_start]] 
-//indexes into PAGE_DATA
+//indexes into page_data_list
 var falling_books = [];
 
-function get_random_int(max){
-  return Math.floor(Math.random() * max);
+function get_random_int(max, min=0){
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//Semi-Randomly picks a page_data index from page_data_list.
+//The index will not be the prior index.
+//The index will not appear untill at least untill all other indexes have been seen once.
+function get_semi_random_index(){
+	var index = getRandomInt(page_data_list_selection.length-1);
+	var selection = page_data_list_selection.at(index);
+	
+	if(selection == last_page_data_list_selection) {//Only happen when the page_data_list_selection was previously populated
+		selection = page_data_list_selection.indexOf(selection) - 1;
+	}
+	
+	if(page_data_list_selection.length == 1){
+		selection = page_data_list_selection.pop();
+		populate_page_data_list_selection();
+	}else{
+		page_data_list_selection.splice(index,1);
+	}
+	
+	last_page_data_list_selection = selection;
+	return selection;
+}
+
+function populate_page_data_list_selection () {
+	page_data_list_selection = [];
+	for(var index = 0; index < page_data_list.length; index++){
+		page_data_list_selection.push(index);
+	}
 }
 
 function init_books (book_container, book_class, has_event) {
@@ -45,7 +77,7 @@ function generate_random_image_path() {
 }
 
 function get_random_page_index() {
-	return get_random_int(PAGE_DATA.length);
+	return get_random_int(page_data_list.length);
 }
 
 
@@ -74,7 +106,8 @@ function randomize_book(index){
 	//Randomize Horizontal Pos
 	book.style.left = (Math.random() * (window.innerWidth - 50)) + "px";
 	//Randomize link to page data
-	falling_books[index][1] = get_random_page_index();
+	falling_books[index][1] = get_semi_random_index();
+	
 	
 	falling_books[index][3] = -200 - Math.random()*1000;//Y
 	falling_books[index][4] = Math.random() * 360;//Rotation 
@@ -119,8 +152,14 @@ function start_anim(index) {
 function book_click(event) {
 	var shearch = function (element) { return element[0] == event.srcElement }//Find element clicked in falling_books 
 	
-	//Index into PAGE_DATA index 1 is the URL
-	var url = PAGE_DATA[falling_books.find(shearch)[1]][1]
+	var page_index = falling_books.find(shearch)[1];
+	
+	if(page_index == -1){
+		return;
+	}
+	
+	//Index into page_data_list index 1 is the URL
+	var url = page_data_list[page_index][1]
 	
     //Move location 
 	window.location.href = url;
@@ -134,7 +173,14 @@ function book_mouseover(event) {
 	var x = event.clientX;
 	var y = event.clientY;
 	
-	var title = PAGE_DATA[falling_books.find(shearch)[1]][0];
+	
+	var page_index = falling_books.find(shearch)[1];
+	
+	if(page_index == -1){
+		return;
+	}
+	
+	var title = page_data_list[page_index][0];
 	
 	hover_text_element.style.left = x + "px";
 	hover_text_element.style.top = y + "px";
@@ -148,8 +194,69 @@ function book_mouseout(event) {
 	hover_text_element.style.display = "none";
 }
 
+function process_raw_page_data(raw) {
+	var lines = raw.split("\n");
+	
+	var delimiter = lines[0];
+	
+	lines.splice(0,1);
+	
+	var out = [];//An array of D2 arrays [0] title [1] relitive url
+	
+	for(var index = lines.length-1; index >= 0; index--){
+		//REMOVE COMMENTS and empty lines
+		if(lines[index].startsWith("//") == true || lines[index] == "" || lines[index] == " "){
+			if(lines.length == 0){
+				lines = [];
+			}
+			else{
+				lines.splice(index,1);
+			}
+			
+		}else{
+			out.push( lines[index].split("*") );
+		}
+		
+	}
+	
+	return out;
+	
+}
+
+async function fetch_page_data_list() {
+	//NOTE SURVER SIDE CROSS NEEDS TO BE SET UP TO TEST
+	const url = "http://10.10.10.100/data/page-data-list.txt";//TODO REMOVE AFTER TESTING OR RELEACE
+	
+	try {
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`);
+		}
+
+		const raw_text_data = await response.text();
+		
+		
+		page_data_list = process_raw_page_data(raw_text_data);
+		
+		
+		ready();
+		
+		
+	} catch (error) {
+		console.error(error.message);
+	}
+}
+
 window.addEventListener('load', function() {
-	init_books(document.getElementById("falling_books_container_focus"), "falling-book", true);
-	init_books(document.getElementById("falling_books_container_far"), "falling-book-far", false);
+	fetch_page_data_list();
+	
 });
 
+function ready() { //Done loading and fetching resources 
+	
+	populate_page_data_list_selection();
+	
+	console.log(page_data_list);
+	init_books(document.getElementById("falling_books_container_focus"), "falling-book", true);
+	init_books(document.getElementById("falling_books_container_far"), "falling-book-far", false);
+}

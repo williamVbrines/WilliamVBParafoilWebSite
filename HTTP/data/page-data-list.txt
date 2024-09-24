@@ -1,0 +1,9 @@
+*
+//The first char in line 1 is the dilimiter between valuse
+//The double slashes indicate a line to be ignored
+//The new ;ine character dictates new arrays
+//TITLE*LINK
+//Bellow is some samples
+Home*index.html
+Portfolio*portfolio.html
+Resume*resume.html
