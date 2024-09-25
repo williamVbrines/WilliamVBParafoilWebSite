@@ -29,16 +29,18 @@ content {
 }
 
 .thumbnail-section-container .title{
+	cursor: default;
 	display: inline;
 	float: left;
 	/* background-color: blue; */
 }
 
-.thumbnail-section-container .link{
+.thumbnail-section-container .content_button{
 	display: inline;
 	
 	float: right;
 	
+	cursor: pointer;
 	/* background-color: red; */
 }
 

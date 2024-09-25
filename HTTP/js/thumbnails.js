@@ -12,7 +12,54 @@ const THUMBNAIL_FOLDER_PATH = "assets/images/thumbnails/"
 
 var table_of_contents = {};
 
-//Sort Thumbnails newest. And put them into their correct conatiner based on their tag.
+const MORE_THUMBNAIL_MAX = 1000; //Per group while exteneed via more...
+const LESS_THUMBNAIL_MAX = 1; //Per group while redused via less...
+
+
+function content_button_on_clicked(event) {
+	var object = event.target;
+	var parent_element = object.parentElement;
+	
+	console.log(object.id);
+	
+	if(object.innerHTML == "more..."){
+		object.innerHTML = "less...";
+		switch(parent_element.id){
+			case "games-and-code":
+				populate_thumbnail_group(document.getElementById("games-and-code-thumbnail-container"), ["code","games","example"], MORE_THUMBNAIL_MAX);
+				break;
+			case "art-and-design":
+				populate_thumbnail_group(document.getElementById("art-and-design-thumbnail-container"), ["art","design"], MORE_THUMBNAIL_MAX);
+				break;
+			case "bookbinding-and-crafts":
+				populate_thumbnail_group(document.getElementById("bookbinding-and-crafts-thumbnail-container"), ["bookbinding","craft"], MORE_THUMBNAIL_MAX);
+				break;
+			default:
+				object.innerHTML = "less...";
+		}
+		
+	}
+	else
+	{
+		object.innerHTML = "more...";
+		
+		switch(parent_element.id){
+			case "games-and-code":
+				populate_thumbnail_group(document.getElementById("games-and-code-thumbnail-container"), ["code","games","example"], LESS_THUMBNAIL_MAX);
+				break;
+			case "art-and-design":
+				populate_thumbnail_group(document.getElementById("art-and-design-thumbnail-container"), ["art","design"], LESS_THUMBNAIL_MAX);
+				break;
+			case "bookbinding-and-crafts":
+				populate_thumbnail_group(document.getElementById("bookbinding-and-crafts-thumbnail-container"), ["bookbinding","craft"], LESS_THUMBNAIL_MAX);
+				break;
+			default:
+				object.innerHTML = "more...";
+		}
+		
+	}
+	
+}
 
 function create_thumbnail(thumbnail_unique_key, thumbnail_data, thumbnail_parent) {
 	const thumbnail = document.createElement("img");
@@ -44,8 +91,6 @@ function thumbnail_on_clicked(event) {
 		url = data["url"];
 	}
 	
-	console.log(url);
-	
 	window.location.href = url;
 }
 
@@ -68,6 +113,8 @@ function thumbnail_on_error (event) {
 	}
 	
 	event.target.src = THUMBNAIL_FOLDER_PATH + default_thumbnail + EXTENTION;
+	
+	return true;
 }
 
 //group_element is an element
@@ -81,7 +128,6 @@ function populate_thumbnail_group(group_element, tags, max){
 	//Narrow selection baseed off of tags
 	for(var key in table_of_contents){
 		var data = table_of_contents[key];
-		console.log(data["tags"]);
 		
 		for(var tag_index in tags){
 			if(data["tags"].includes(tags[tag_index])){
@@ -93,8 +139,6 @@ function populate_thumbnail_group(group_element, tags, max){
 	
 	//Sort selection based off of date
 	selection.sort(function(a, b){return b[1]["date"]-a[1]["date"]})
-	
-	console.log(selection);
 	
 	
 	for(var index = 0; index < Math.min(max, selection.length); index++){
@@ -127,10 +171,11 @@ async function fetch_table_of_contents() {
 }
 
 function ready() {
+	
 	//TODO REMOVE example from tags list bellow 
-	populate_thumbnail_group(document.getElementById("games-and-code-thumbnail-container"), ["code","games","example"], 3);
-	populate_thumbnail_group(document.getElementById("art-and-design-thumbnail-container"), ["art","design"], 3);
-	populate_thumbnail_group(document.getElementById("bookbinding-and-crafts-thumbnail-container"), ["bookbinding","craft"], 3);
+	populate_thumbnail_group(document.getElementById("games-and-code-thumbnail-container"), ["code","games","example"], LESS_THUMBNAIL_MAX);
+	populate_thumbnail_group(document.getElementById("art-and-design-thumbnail-container"), ["art","design"], LESS_THUMBNAIL_MAX);
+	populate_thumbnail_group(document.getElementById("bookbinding-and-crafts-thumbnail-container"), ["bookbinding","craft"], LESS_THUMBNAIL_MAX);
 }
 
 window.addEventListener('load',fetch_table_of_contents());
