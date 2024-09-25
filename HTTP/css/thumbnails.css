@@ -20,7 +20,7 @@ content {
 	/* background-color: black; */
 }
 
-.thumbnail-container {
+.thumbnail-section-container {
 	margin-top:10vh;
 	text-align:center;
 	width:80vw;
@@ -28,13 +28,13 @@ content {
 	/* background-color: green; */
 }
 
-.thumbnail-container .title{
+.thumbnail-section-container .title{
 	display: inline;
 	float: left;
 	/* background-color: blue; */
 }
 
-.thumbnail-container .link{
+.thumbnail-section-container .link{
 	display: inline;
 	
 	float: right;
@@ -42,13 +42,17 @@ content {
 	/* background-color: red; */
 }
 
-.thumbnail-container .thumbnail {
+.thumbnail {
 	display: inline-block;
+	
+	cursor: pointer;
 	
 	width: 70vw;
 	height: 39.375vw;
 	
 	margin-bottom: 5vh; 
+	margin-left: 1vw;
+	margin-right: 1vw;
 	
 	/* Border */
 	border: 2px solid #dcd2ca;
@@ -61,12 +65,18 @@ content {
 	font-family: IMFell;
 	font-size: 3vh;
 	
-	background-color: gray;
+	/* background-color: gray; */
+	
+	transition: border-radius 100ms linear;
+}
+
+.thumbnail:hover {
+	border-radius: 0px;
 }
 		
 /*Above 700px*/
 @media screen and (min-width: 700px) {
-	.thumbnail-container .thumbnail {
+	.thumbnail {
 		/* float:left; */
 		width: 23vw;
 		height: 12.9375vw;
