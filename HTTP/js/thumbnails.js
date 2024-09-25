@@ -33,10 +33,20 @@ function create_thumbnail(thumbnail_unique_key, thumbnail_data, thumbnail_parent
 function thumbnail_on_clicked(event) {
 	var key = event.target.id;
 	var index = key.lastIndexOf("_");
-	
+	var url = "#"
 	if(index != -1){
-		key.substr(index);
+		key = key.substr(index+1);
 	}
+	
+	var data = table_of_contents[key];
+	
+	if(data != undefined){
+		url = data["url"];
+	}
+	
+	console.log(url);
+	
+	window.location.href = url;
 }
 
 function thumbnail_on_error (event) {
