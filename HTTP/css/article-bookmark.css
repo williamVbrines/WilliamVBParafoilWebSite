@@ -1,0 +1,59 @@
+.bookmark {
+	position: absolute;
+	top:2vh;
+	left: 15vw;
+	
+	width: 15vh;
+	height: 15vh;
+	
+	margin: 0;
+	padding:0;
+	/* background-color: green; */
+	
+	transition: top 0.2s linear;
+}
+
+
+.bookmark:hover {
+	top:.5vh;
+}
+
+.bookmark .base, .bookmark .shadow {
+	position: absolute;
+	top:0;
+
+	width: 15vh;
+	height: 15vh;
+	
+	background-size: 15vh 15vh;
+}
+.bookmark .base {
+	left:0;
+	
+	background-image: url("../assets/images/bookmark/Bookmark_246x195.png");
+}
+
+.bookmark .shadow{
+	left:1vw;
+	
+	opacity: 0.5;
+	
+	mix-blend-mode: multiply;
+	
+	background-image: url("../assets/images/bookmark/BookmarkShadow_246x195.png");
+}
+
+.icon{
+	position: absolute;
+	top:3vh;
+	left:0;
+	
+	/* 16x9 */
+	width: 100%;
+	height: 56.25%;
+	
+	
+	
+	position: absolute;
+	
+}
