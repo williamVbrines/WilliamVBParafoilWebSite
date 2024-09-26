@@ -178,4 +178,4 @@ function ready() {
 	populate_thumbnail_group(document.getElementById("bookbinding-and-crafts-thumbnail-container"), ["bookbinding","craft"], LESS_THUMBNAIL_MAX);
 }
 
-window.addEventListener('load',fetch_table_of_contents());
+window.addEventListener('load',fetch_table_of_contents);
