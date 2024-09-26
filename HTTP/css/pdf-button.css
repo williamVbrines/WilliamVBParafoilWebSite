@@ -1,0 +1,17 @@
+.pdf-button {
+	position: relative;
+	
+	cursor: pointer;
+	
+	float: right;
+	
+	width: 10vh;
+	height: 5.625vh;
+	background-size: 10vh 5.625vh;
+	
+	background-image: url("../assets/images/pdfButton/PDFButton_Normal_139x97.png");
+}
+
+.pdf-button:hover{
+	background-image: url("../assets/images/pdfButton/PDFButton_Hover_139x97.png");
+}
